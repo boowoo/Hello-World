@@ -9,14 +9,14 @@ FILE *openFile(){
 
 char *getNextWord() {
 	char *a = 0;
-	printf("MOCK: calling openFile\n");
+	printf("MOCK: calling getNextWord\n");
 	return a;
 }
 
 void addWord(){
-	printf("MOCK: calling openFile\n");
+	printf("MOCK: calling addWord\n");
 }
 
 void PrintDictionary() {
-	printf("MOCK: calling openFile\n");
+	printf("MOCK: calling PrintDictionary\n");
 }
