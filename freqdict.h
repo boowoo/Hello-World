@@ -1,4 +1,6 @@
 #include <stdio.h>
+#ifndef FREQDICT_H
+#define FREQDICT_H
 //Функция получает имя файл из командной строки.
 //Открывает файл при помощи FILE *fopen(char *name, char *mode)
 //ОБрабатывает ошибки и возвращает уназатель на файл
@@ -21,4 +23,4 @@ void addWord();
 //Печать словаря
 //void PrintDictionary(struct dict * dic); 
 void PrintDictionary();
-
+#endif

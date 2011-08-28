@@ -1,5 +1,6 @@
-#include "freqdict.h"
 #include <stdio.h>
+#include "freqdict.h"
+
 int main(void) {
 	FILE *fp;
 	char *a;
@@ -8,4 +9,5 @@ int main(void) {
 	addWord();
 	PrintDictionary();
 	printf("%p%p", fp, a);
+  return 0;
 }
