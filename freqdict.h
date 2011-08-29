@@ -1,26 +1,27 @@
 #include <stdio.h>
 #ifndef FREQDICT_H
 #define FREQDICT_H
-//Функция получает имя файл из командной строки.
-//Открывает файл при помощи FILE *fopen(char *name, char *mode)
-//ОБрабатывает ошибки и возвращает уназатель на файл
-//FILE *openFile(char *fileName); 
-FILE *openFile(); 
-	
+//Функция получает имя файла из командной строки.
+//Открывает этот файл при помощи FILE *fopen(char *name, char *mode)
+//Обрабатывает ошибки и возвращает указатель на файл
+FILE *openFile(char file_name[]); 
 
 //Функция получает в качестве аргумента указатель на файл, который нужно считать
-//при помощи int getc(FILE *fileName) обрабатывается посимвольно файл, и в нем находятся слова.
+//Файл считывается посимвольно при помощи int getc(FILE *fileName).В файле ищутся слова. 
 //Функция возвращает указатель на найденное слово.
-//char *getNextWord(FILE *fileName);   
-char *getNextWord();   
+char *getNextWord(FILE *file);   
 
-//Получает слово, проверяет есть ли такое в текущем словаре.
+//Получает указатель на слово, проверяет есть ли такое в текущем словаре.
 //Если есть, то инкрементируем число вхождений этого слова.
 //Если нет, то добавляем слово в словарь.
-//void addWord(char *word); 
-void addWord(); 
+void addWord(char *word); 
 
 //Печать словаря
 //void PrintDictionary(struct dict * dic); 
 void PrintDictionary();
+
+struct dict
+{
+	int temp;
+};
 #endif

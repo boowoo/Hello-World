@@ -1,20 +1,25 @@
 #include <stdio.h>
 #include "freqdict.h"
 
-FILE *openFile(){
+FILE *openFile(char file_name[]){
 	FILE *file = 0;
+
 	printf("MOCK: calling openFile\n");
+	printf("argument of openFile:%s\n", file_name);
 	return file;
 }
 
-char *getNextWord() {
-	char *a = 0;
+char *getNextWord(char *file) {
+	char *next_word = 0;
+
 	printf("MOCK: calling getNextWord\n");
-	return a;
+	printf("argument of getNextWord:%p\n", file);
+	return next_word; 
 }
 
-void addWord(){
+void addWord(char *word) {
 	printf("MOCK: calling addWord\n");
+	printf("argumnt of addWord:%p\n", word);
 }
 
 void PrintDictionary() {
