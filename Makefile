@@ -33,8 +33,8 @@ gtest_main.a : gtest-all.o gtest_main.o
 	$(AR) $(ARFLAGS) $@ $^
 
 # create and run unittest file:
-test: googletest freqdict_unittest.o gtest_main.a
-	g++ $(CFLAGS) $(GTEST_INCL) gtest_main.a freqdict_unittest.o -o freqdict_test
+test: googletest freqdict_unittest.o gtest_main.a freqdict.o
+	g++ $(CFLAGS) $(GTEST_INCL) gtest_main.a freqdict.o freqdict_unittest.o -o freqdict_test
 	./freqdict_test
 
 # main executable:
