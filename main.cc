@@ -1,6 +1,8 @@
 #include <stdio.h>
-#include "freqdict.h"
 #include <stdlib.h>
+
+#include "freqdict.h"
+
 int main(int argc, char *argv[]) {
 	FILE *fp;
 	char *next_word;
@@ -12,7 +14,6 @@ int main(int argc, char *argv[]) {
 	}
     // fp будет хранить в себе указатель на файл.
 	fp = openFile(argv[1]);
-	// next_word будет хранить указатель на следующее слово.
 	next_word = getNextWord(fp);   
 	addWord(next_word);            
 	PrintDictionary();

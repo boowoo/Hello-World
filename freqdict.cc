@@ -9,7 +9,8 @@ FILE *openFile(char file_name[]){
 	return file;
 }
 
-char *getNextWord(char *file) {
+
+char *getNextWord(FILE *file) {
 	char *next_word = 0;
 
 	printf("MOCK: calling getNextWord\n");

@@ -1,6 +1,8 @@
-#include <stdio.h>
 #ifndef FREQDICT_H
 #define FREQDICT_H
+
+#include <stdio.h>
+
 //Функция получает имя файла из командной строки.
 //Открывает этот файл при помощи FILE *fopen(char *name, char *mode)
 //Обрабатывает ошибки и возвращает указатель на файл
