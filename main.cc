@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "freqdict.h"
 
 int main(int argc, char *argv[]) {
 	FILE *fp;
-	char *next_word;
-//	struct dict dic; 
+	char *next_word_pointer;
+	extern int ch;
+//	struct dict dic;
 
 	if (argc < 2){
 		printf("Укажите имя файла");
@@ -14,9 +14,12 @@ int main(int argc, char *argv[]) {
 	}
     // fp будет хранить в себе указатель на файл.
 	fp = openFile(argv[1]);
-	next_word = getNextWord(fp);   
-	addWord(next_word);            
+	while (ch != EOF) {
+		next_word_pointer = getNextWord(fp);
+		addWord(next_word_pointer);
+	}
 	PrintDictionary();
-	printf("%p%p\n", fp, next_word);
+	printf("%p%p\n", fp, next_word_pointer);
 	return 0;
 }
+
