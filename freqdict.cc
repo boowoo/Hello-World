@@ -1,9 +1,12 @@
 #include <stdio.h>
-#include "freqdict.h"
 #include <stdlib.h>
+#include "freqdict.h"
+int ch;
+char next_word[MAX_WORD];
 
 FILE *openFile(char file_name[]){
 	FILE *file = 0;
+
 
 	printf("MOCK: calling openFile\n");
 
@@ -16,14 +19,15 @@ FILE *openFile(char file_name[]){
 
 
 char *getNextWord(FILE *file) {
-	extern char next_word[];
-	extern int ch;
 	int i = 0;
 
 	printf("MOCK: calling getNextWord\n");
 
+	//next_word = (char*) malloc(50);
 	while (true) {
 		ch = getc(file);
+		if (ch == EOF)
+			exit(1);
 		if ((ch != '\n') && (ch != '\t') && (ch != ' ') && (ch != '\r'))
 			next_word[i++] = ch;
 		else {
@@ -35,9 +39,9 @@ char *getNextWord(FILE *file) {
 
 void addWord(char *word) {
 	printf("MOCK: calling addWord\n");
-	printf("argumnt of addWord:%p\n", word);
+	printf("argumnt of addWord:%s\n", word);
 }
 
-void PrintDictionary() {
+void PrintDictionary( struct dict dic) {
 	printf("MOCK: calling PrintDictionary\n");
 }

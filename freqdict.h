@@ -1,6 +1,6 @@
 #ifndef FREQDICT_H
 #define FREQDICT_H
-
+#define MAX_WORD 50
 #include <stdio.h>
 
 //Функция получает имя файла из командной строки.
@@ -20,17 +20,18 @@ void addWord(char *word);
 
 //Печать словаря
 //void PrintDictionary(struct dict * dic); 
-void PrintDictionary();
+void PrintDictionary( struct dict dic);
 
 struct dict
 {
 	int temp;
 };
+//Массив next_word[] будет хранить слово
+extern char next_word[];
 
 //Переменная ch будет содержать текущий символ
 //при считывании из файла
-int ch;
+extern int ch;
 
-//Массив, который будет содержать слово
-char next_word[50];
+
 #endif
