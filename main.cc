@@ -11,19 +11,31 @@ int main(int argc, char *argv[]) {
 		printf("Укажите имена файлов\n");
 		exit (1);
 	}
-	while (--argc > 0){
-    	// fp будет хранить в себе указатель на файл.
-		fp = openFile(*++argv);
-		printf("______________________OMG! argc = %d\n", argc);
-		while (ch != EOF) {
-			next_word_pointer = getNextWord(fp);
-			addWord(next_word_pointer);
+
+  // стартуем со 2го аргумента, потому что первый == имя программы
+  for (int cur_arg = 1; cur_arg < argc; ++cur_arg) {
+    fp = openFile (argv[cur_arg]);
+    printf("current arg = %d, value = %s\n", cur_arg, argv[cur_arg]);
+    // get next words here ...
+		// while (ch != EOF) {
+    //  тут у нас обоих ошибка. Вопрос - почему? =)
+    //  в том дело, что 2, 3 и тд аргументы открываются, но не 
+    //  пишут слова, которые читают из файла, а сразу - end reading
+		//	next_word_pointer = getNextWord(fp);
+		//	addWord(next_word_pointer);
+		//}
+		 while (1) {
+		  	next_word_pointer = getNextWord(fp);
+        if (ch == EOF)
+          break;
+		  	addWord(next_word_pointer);
 		}
-		printf("______________________OMG!\n");
+    // эта строчка была не достижима, потому что в файле freqdic.cc:27
+    // у тебя указано, что когда ch=eof, делать exit(1) :-D
+		printf("end reading %d argument\n", cur_arg);
 		fclose(fp);
 	}
 	PrintDictionary( dic);
 	printf("%p%p\n", fp, next_word_pointer);
 	return 0;
 }
-

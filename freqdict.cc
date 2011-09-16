@@ -7,7 +7,6 @@ char next_word[MAX_WORD];
 FILE *openFile(char file_name[]){
 	FILE *file = 0;
 
-
 	printf("MOCK: calling openFile\n");
 
 	if ((file = fopen(file_name, "r")) == NULL) {
@@ -27,7 +26,9 @@ char *getNextWord(FILE *file) {
 	while (true) {
 		ch = getc(file);
 		if (ch == EOF)
-			exit(1);
+			// exit(1);
+			return next_word;
+
 		if ((ch != '\n') && (ch != '\t') && (ch != ' ') && (ch != '\r'))
 			next_word[i++] = ch;
 		else {

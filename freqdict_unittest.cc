@@ -1,5 +1,6 @@
 #include "freqdict.h"
 #include "gtest/gtest.h"
+
 // openFile():
 TEST(openFileTest, validFile) {
   // TODO(dmitryhd): add here error handling
@@ -8,9 +9,6 @@ TEST(openFileTest, validFile) {
   FILE * open_file = openFile("/tmp/openfiletest_simple");
   FILE * wrong_file = 0;
   ASSERT_NE(open_file, wrong_file);
-  char buf[1024];
-  fscanf(open_file, "%s", buf);
-  EXPECT_STREQ("omg", buf);
   fclose(new_f);
   fclose(open_file);
 }
@@ -20,8 +18,13 @@ TEST(GetWordTest, SimpleSpaces) {
   // TODO(dmitryhd): add here error handling
   FILE * new_f = fopen("/tmp/getwordtest_simple\n", "w+");
   fprintf(new_f, "omg test\n");
-  EXPECT_STREQ("omg", getNextWord(new_f));
-  EXPECT_STREQ("test", getNextWord(new_f));
+  FILE * open_file = openFile("/tmp/openfiletest_simple");
+  char * x = getNextWord(open_file);
+  printf("1: x = %s\n", x);
+  EXPECT_STREQ("omg", x);
+  x = getNextWord(open_file);
+  printf("2: x = %s\n", x);
+  EXPECT_STREQ("test", x);
   fclose(new_f);
 }
 
