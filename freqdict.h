@@ -19,7 +19,8 @@ char *getNextWord(FILE *file);
 void addWord(char *word); 
 
 //Печать словаря
-//void PrintDictionary(struct dict * dic); 
+//TODO (boowoo):передавать не саму структуру а указатель на нее
+//сравнить производительность 
 void PrintDictionary( struct dict dic);
 
 struct dict

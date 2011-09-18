@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "freqdict.h"
+
 int ch;
 char next_word[MAX_WORD];
 
@@ -22,11 +23,9 @@ char *getNextWord(FILE *file) {
 
 	printf("MOCK: calling getNextWord\n");
 
-	//next_word = (char*) malloc(50);
 	while (true) {
 		ch = getc(file);
 		if (ch == EOF)
-			// exit(1);
 			return next_word;
 
 		if ((ch != '\n') && (ch != '\t') && (ch != ' ') && (ch != '\r'))

@@ -8,7 +8,8 @@ int main(int argc, char *argv[]) {
 	char *next_word_pointer;
 	struct dict dic;
 	if (argc == 1) {
-		printf("Укажите имена файлов\n");
+		printf("usage: %s some_arg1 some_arg2 \n",  argv[0]);
+		printf("example: %s /usr/tmp/test.txt\n",  argv[0]);
 		exit (1);
 	}
 
