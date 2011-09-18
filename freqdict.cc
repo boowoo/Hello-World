@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "freqdict.h"
 int ch;
 char next_word[MAX_WORD];
@@ -21,20 +22,30 @@ char *getNextWord(FILE *file) {
 	int i = 0;
 
 	printf("MOCK: calling getNextWord\n");
-
+  char is_word_begin = 0;
 	//next_word = (char*) malloc(50);
 	while (true) {
 		ch = getc(file);
-		if (ch == EOF)
-			// exit(1);
-			return next_word;
-
-		if ((ch != '\n') && (ch != '\t') && (ch != ' ') && (ch != '\r'))
+    // printf("getNW: i=%d, get=%c\n", i, ch);
+    if (isspace(ch)) {
+      if (is_word_begin) {
+        // printf("getNW: endword i=%d, get=%c\n", i, ch);
+        next_word[i] = '\0';
+        return next_word;
+      }
+      else
+        continue;
+    }
+    else {
+      is_word_begin = 1;
 			next_word[i++] = ch;
-		else {
+    }
+		if (ch == EOF) {
+			// exit(1);
+      // printf("getNW: i=%d EOF\n", i);
 			next_word[i] = '\0';
 			return next_word;
-		}
+    }
 	}
 }
 
