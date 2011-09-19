@@ -96,12 +96,11 @@ TEST(addWord,  second_addWord_test) {
 		next_word_pointer = getNextWord(open_file);
 		addWord(next_word_pointer);
 	}
-	dic.words[0].num = 3;
 	//	3 раза в строке встретилось слово omg, 2 раза test, 1 раз wtf
 	//	Проверка происходит предположительно вот так:
-		EXPECT_STREQ("3", dic.words[0].num);
-//		EXPECT_STREQ("2", dic.words[1].num);
-//		EXPECT_STREQ("1", dic.words[2].num);
+		EXPECT_EQ(3, dic.words[0].num);
+		EXPECT_EQ(2, dic.words[1].num);
+		EXPECT_EQ(1, dic.words[2].num);
 }
 
 // there is no need for main().
