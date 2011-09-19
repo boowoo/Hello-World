@@ -6,8 +6,7 @@ extern int ch;
 int main(int argc, char *argv[]) {
 	FILE *fp;
 	char *next_word_pointer;
-	struct dict dic;
-	if (argc == 1) {
+		if (argc == 1) {
 		printf("usage: %s some_arg1 some_arg2 \n",  argv[0]);
 		printf("example: %s /usr/tmp/test.txt\n",  argv[0]);
 		exit (1);
@@ -31,12 +30,10 @@ int main(int argc, char *argv[]) {
           break;
 		  	addWord(next_word_pointer);
 		}
-    // эта строчка была не достижима, потому что в файле freqdic.cc:27
-    // у тебя указано, что когда ch=eof, делать exit(1) :-D
 		printf("end reading %d argument\n", cur_arg);
 		fclose(fp);
 	}
-	PrintDictionary( dic);
+	//PrintDictionary( dic);
 	printf("%p%p\n", fp, next_word_pointer);
 	return 0;
 }

@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "freqdict.h"
 
+struct dict dic;
 int ch;
 char next_word[MAX_WORD];
 
-FILE *openFile(char file_name[]){
+FILE *openFile(char file_name[]) {
 	FILE *file = 0;
 
 	printf("MOCK: calling openFile\n");
@@ -20,17 +22,27 @@ FILE *openFile(char file_name[]){
 
 char *getNextWord(FILE *file) {
 	int i = 0;
-
+	char is_word_begin = 0;
 	printf("MOCK: calling getNextWord\n");
 
 	while (true) {
 		ch = getc(file);
-		if (ch == EOF)
-			return next_word;
-
-		if ((ch != '\n') && (ch != '\t') && (ch != ' ') && (ch != '\r'))
-			next_word[i++] = ch;
+		// printf("getNW: i=%d, get=%c\n", i, ch);
+		if (isspace(ch)) {
+			if (is_word_begin) {
+				// printf("getNW: endword i=%d, get=%c\n", i, ch);
+				next_word[i] = '\0';
+				return next_word;
+			}
+			else
+				continue;
+		}
 		else {
+			is_word_begin = 1;
+			next_word[i++] = ch;
+		}
+		if (ch == EOF) {
+			// printf("getNW: i=%d EOF\n", i);
 			next_word[i] = '\0';
 			return next_word;
 		}
