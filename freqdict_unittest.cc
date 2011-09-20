@@ -52,6 +52,38 @@ TEST(GetWordTest, ComplicatedSpaces) {
   fclose(new_f);
 }
 
+TEST(GetWordTest, Punctuation) {
+  // TODO(dmitryhd): add here error handling
+  char filename_const[]= "/tmp/GetWordTest_Punctuation";
+  char * filename = &filename_const[0];
+
+  FILE * new_f = fopen(filename_const, "w+");
+  fprintf(new_f, "word1; ...word2... word3? word4, word5!");
+  fclose(new_f);
+  FILE * open_file = openFile(filename);
+  EXPECT_STREQ("word1", getNextWord(open_file));
+  EXPECT_STREQ("word2", getNextWord(open_file));
+  EXPECT_STREQ("word3", getNextWord(open_file));
+  EXPECT_STREQ("word4", getNextWord(open_file));
+  EXPECT_STREQ("word5", getNextWord(open_file));
+  fclose(new_f);
+}
+
+TEST(GetWordTest, ToLower) {
+  // TODO(dmitryhd): add here error handling
+  char filename_const[]= "/tmp/GetWordTest_ToLower";
+  char * filename = &filename_const[0];
+
+  FILE * new_f = fopen(filename_const, "w+");
+  fprintf(new_f, "Word1 WORD2 WoRd3");
+  fclose(new_f);
+  FILE * open_file = openFile(filename);
+  EXPECT_STREQ("word1", getNextWord(open_file));
+  EXPECT_STREQ("word2", getNextWord(open_file));
+  EXPECT_STREQ("word3", getNextWord(open_file));
+  fclose(new_f);
+}
+
 //	addWord() first test
 //	цель теста - проверить правильно вносятся в структуру слова,
 //	предварительно записанные в файлi.

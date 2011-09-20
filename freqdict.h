@@ -1,7 +1,7 @@
 #ifndef FREQDICT_H
 #define FREQDICT_H
-#define MAX_WORD 50
-#define MAX_COUNT_OF_WORDS 100
+#define MAX_WORD 500 // wtf?
+#define MAX_COUNT_OF_WORDS 100000
 #include <stdio.h>
 
 //Функция получает имя файла из командной строки.

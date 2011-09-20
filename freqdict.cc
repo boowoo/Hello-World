@@ -11,7 +11,7 @@ char next_word[MAX_WORD];
 FILE *openFile(char file_name[]) {
 	FILE *file = 0;
 
-	printf("MOCK: calling openFile\n");
+//	printf("MOCK: calling openFile\n");
 
 	if ((file = fopen(file_name, "r")) == NULL) {
 		fprintf(stderr, "can't open file %s", file_name);
@@ -24,12 +24,18 @@ FILE *openFile(char file_name[]) {
 char *getNextWord(FILE *file) {
 	int i = 0;
 	char is_word_begin = 0;
-	printf("MOCK: calling getNextWord\n");
+	// printf("MOCK: calling getNextWord\n");
 
 	while (true) {
 		ch = getc(file);
+		if (ch == EOF) {
+			// printf("getNW: i=%d EOF\n", i);
+			next_word[i] = '\0';
+			return str_copy(next_word);
+		}
 		// printf("getNW: i=%d, get=%c\n", i, ch);
-		if (isspace(ch)) {
+    // check if symbol is space or punctuation character
+		if (isspace(ch) || ispunct(ch)) {
 			if (is_word_begin) {
 				// printf("getNW: endword i=%d, get=%c\n", i, ch);
 				next_word[i] = '\0';
@@ -40,12 +46,7 @@ char *getNextWord(FILE *file) {
 		}
 		else {
 			is_word_begin = 1;
-			next_word[i++] = ch;
-		}
-		if (ch == EOF) {
-			// printf("getNW: i=%d EOF\n", i);
-			next_word[i] = '\0';
-			return str_copy(next_word);
+			next_word[i++] = tolower(ch);
 		}
 	}
 }
@@ -59,8 +60,8 @@ char *str_copy (char *s) {
 }
 
 void addWord(char *word) {
-	printf("MOCK: calling addWord\n");
-	printf("argumnt of addWord:%s\n", word);
+	//printf("MOCK: calling addWord\n");
+	//printf("argumnt of addWord:%s\n", word);
 	//	долго думал как лучше назвать переменную,
 	//	но так и не предумал
 	//	flag = 1, если текущее слово уже было в словаре.
@@ -71,9 +72,9 @@ void addWord(char *word) {
 	for (int i = 0;(i < curent_number) && (flag != 1);i++) {
 		//	тело if'а выполняется, если строки равны.
 		if (strcmp(word, dic.words[i].word) == 0 ) {
-			flag = 1; 
+			flag = 1;
 			dic.words[i].num++;
-		}					
+		}
 	}
 	if (flag == 0) {
 		dic.words[curent_number].word = word;
@@ -83,9 +84,9 @@ void addWord(char *word) {
 }
 
 void printDictionary( struct dict dic) {
-	printf("MOCK: calling PrintDictionary\n");
+	//printf("MOCK: calling PrintDictionary\n");
 
 	for(int i =0; i < dic.total_num; i++) {
-		printf("%d.%s - %d\n", i+1, dic.words[i].word, dic.words[i].num);	
+		printf("%d %d %s\n", dic.words[i].num, i+1, dic.words[i].word);
 	}
 }
