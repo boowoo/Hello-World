@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
 		printf("end reading %d argument\n", cur_arg);
 		fclose(fp);
 	}
-	//PrintDictionary( dic);
+	printDictionary( dic);
 	printf("%p%p\n", fp, next_word_pointer);
 	return 0;
 }

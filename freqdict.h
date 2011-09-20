@@ -22,7 +22,7 @@ void addWord(char *word);
 //Печать словаря
 //TODO (boowoo):передавать не саму структуру а указатель на нее
 //сравнить производительность
-void PrintDictionary( struct dict dic);
+void printDictionary( struct dict dic);
 
 //	Функция получает указатель на слово
 //	выделяет под него нужное кол-во памяти

@@ -69,11 +69,17 @@ TEST(addWord, first_addWord_test) {
 	addWord(next_word_pointer);
 	next_word_pointer = getNextWord(open_file);
 	addWord(next_word_pointer);
+	fclose(open_file);
 	//	дальше идет проверка совпадают ли поля структуры dict
 	//	со словами, содержащимися в файле filename_const
 	//	выглядит проверка примерно вот так:
-        EXPECT_STREQ("omg", dic.words[0].word);
-    	EXPECT_STREQ("test", dic.words[1].word);
+    EXPECT_STREQ("omg", dic.words[0].word);
+    EXPECT_STREQ("test", dic.words[1].word);
+	dic.total_num=0;
+	free(dic.words[0].word);
+	free(dic.words[1].word);
+	dic.words[0].num = 0;
+	dic.words[1].num = 0;
 }
 
 //	addWord() second test
@@ -86,7 +92,7 @@ TEST(addWord,  second_addWord_test) {
 	char * filename = &filename_const[0];
 
 	FILE * new_f = fopen(filename_const,  "w");
-	fprintf(new_f,  "omg omg omg test test wtf\n");
+	fprintf(new_f,  "sex sex sex drugs drugs rnr\n");
 	fclose(new_f);
 	FILE * open_file = openFile(filename);
 
@@ -96,6 +102,7 @@ TEST(addWord,  second_addWord_test) {
 		next_word_pointer = getNextWord(open_file);
 		addWord(next_word_pointer);
 	}
+	fclose(open_file);
 	//	3 раза в строке встретилось слово omg, 2 раза test, 1 раз wtf
 	//	Проверка происходит предположительно вот так:
 		EXPECT_EQ(3, dic.words[0].num);

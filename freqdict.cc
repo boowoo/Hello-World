@@ -76,11 +76,16 @@ void addWord(char *word) {
 		}					
 	}
 	if (flag == 0) {
-		dic.words[curent_number++].word = word;
+		dic.words[curent_number].word = word;
+		dic.words[curent_number].num++;
 		dic.total_num++;
 	}
 }
 
-void PrintDictionary( struct dict dic) {
+void printDictionary( struct dict dic) {
 	printf("MOCK: calling PrintDictionary\n");
+
+	for(int i =0; i < dic.total_num; i++) {
+		printf("%d.%s - %d\n", i+1, dic.words[i].word, dic.words[i].num);	
+	}
 }
