@@ -9,6 +9,10 @@ all : freqdict
 googletest:
 	./install_gtest.sh
 
+#	cpplint - code style checker
+check:
+	cpplint.py freqdict.cc freqdict.h main.cc freqdict_unittest.cc
+
 # Usually you shouldn't tweak such internal variables, indicated by a
 # trailing _.
 GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
