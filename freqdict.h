@@ -1,7 +1,10 @@
-#ifndef FREQDICT_H
-#define FREQDICT_H
+// Copyright 2011 boowoo
+#ifndef FREQDICT_H_
+#define FREQDICT_H_
+
 #define MAX_WORD 500  // wtf?
 #define MAX_COUNT_OF_WORDS 100000
+
 #include <stdio.h>
 
 //  Функция получает имя файла из командной строки.
@@ -20,7 +23,7 @@ char *getNextWord(FILE *file);
 void addWord(char *word);
 
 //  Печать словаря
-//  TODO(boowoo): передавать не саму структуру а указатель на нее
+// TODO(boowoo): передавать не саму структуру а указатель на нее
 //  сравнить производительность
 void printDictionary(struct dict dic);
 
@@ -53,4 +56,4 @@ extern char next_word[];
 extern int ch;
 
 extern struct dict dic;
-#endif
+#endif  // FREQDICT_H_

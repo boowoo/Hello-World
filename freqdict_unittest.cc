@@ -1,3 +1,4 @@
+// Copyright 2011 boowoo
 #include "./freqdict.h"
 #include "gtest/gtest.h"
 

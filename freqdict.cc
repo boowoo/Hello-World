@@ -1,3 +1,4 @@
+// Copyright 2011 boowoo
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
