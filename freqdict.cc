@@ -86,7 +86,6 @@ void addWord(char *word) {
 void printDictionary( struct dict dic) {
 	//printf("MOCK: calling PrintDictionary\n");
 
-	for(int i =0; i < dic.total_num; i++) {
-		printf("%d %d %s\n", dic.words[i].num, i+1, dic.words[i].word);
-	}
-}
+  for (int i = 0; i < dic.total_num; i++) {
+    printf("%d %d %s\n", dic.words[i].num, i+1, dic.words[i].word);
+  }
