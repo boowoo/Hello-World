@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "./freqdict.h"
-extern int ch;
 
 int main(int argc, char *argv[]) {
   FILE *fp;
   char *next_word_pointer;
+  int ch;
     if (argc == 1) {
     printf("usage: %s some_arg1 some_arg2 \n",  argv[0]);
     printf("example: %s /usr/tmp/test.txt\n",  argv[0]);
@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
     fp = openFile(argv[cur_arg]);
     printf("current arg = %d, value = %s\n", cur_arg, argv[cur_arg]);
      while (1) {
-        next_word_pointer = getNextWord(fp);
+        next_word_pointer = getNextWord(fp, &ch);
         if (ch == EOF)
           break;
         addWord(next_word_pointer);

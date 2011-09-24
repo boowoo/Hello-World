@@ -23,15 +23,16 @@ TEST(GetWordTest, SimpleSpaces) {
   // TODO(dmitryhd): add here error handling
   char filename_const[]= "/tmp/SimpleSpaces";
   char * filename = &filename_const[0];
+  int a;
 
   FILE * new_f = fopen(filename_const, "w+");
   fprintf(new_f, "omg test\n");
   fclose(new_f);
   FILE * open_file = openFile(filename);
-  char * x = getNextWord(open_file);
+  char * x = getNextWord(open_file, &a);
   // printf("1: x = %s\n", x);
   EXPECT_STREQ("omg", x);
-  x = getNextWord(open_file);
+  x = getNextWord(open_file, &a);
   // printf("2: x = %s\n", x);
   EXPECT_STREQ("test", x);
   fclose(open_file);
@@ -41,14 +42,15 @@ TEST(GetWordTest, ComplicatedSpaces) {
   // TODO(dmitryhd): add here error handling
   char filename_const[]= "/tmp/openfiletest_simple";
   char * filename = &filename_const[0];
+  int a;
 
   FILE * new_f = fopen(filename_const, "w+");
   fprintf(new_f, "omg  \n\t t   \t\n est\n");
   fclose(new_f);
   FILE * open_file = openFile(filename);
-  EXPECT_STREQ("omg", getNextWord(open_file));
-  EXPECT_STREQ("t", getNextWord(open_file));
-  EXPECT_STREQ("est", getNextWord(open_file));
+  EXPECT_STREQ("omg", getNextWord(open_file, &a));
+  EXPECT_STREQ("t", getNextWord(open_file, &a));
+  EXPECT_STREQ("est", getNextWord(open_file, &a));
   fclose(new_f);
 }
 
@@ -56,16 +58,17 @@ TEST(GetWordTest, Punctuation) {
   // TODO(dmitryhd): add here error handling
   char filename_const[]= "/tmp/GetWordTest_Punctuation";
   char * filename = &filename_const[0];
+  int a;
 
   FILE * new_f = fopen(filename_const, "w+");
   fprintf(new_f, "word1; ...word2... word3? word4, word5!");
   fclose(new_f);
   FILE * open_file = openFile(filename);
-  EXPECT_STREQ("word1", getNextWord(open_file));
-  EXPECT_STREQ("word2", getNextWord(open_file));
-  EXPECT_STREQ("word3", getNextWord(open_file));
-  EXPECT_STREQ("word4", getNextWord(open_file));
-  EXPECT_STREQ("word5", getNextWord(open_file));
+  EXPECT_STREQ("word1", getNextWord(open_file, &a));
+  EXPECT_STREQ("word2", getNextWord(open_file, &a));
+  EXPECT_STREQ("word3", getNextWord(open_file, &a));
+  EXPECT_STREQ("word4", getNextWord(open_file, &a));
+  EXPECT_STREQ("word5", getNextWord(open_file, &a));
   fclose(new_f);
 }
 
@@ -73,14 +76,15 @@ TEST(GetWordTest, ToLower) {
   // TODO(dmitryhd): add here error handling
   char filename_const[]= "/tmp/GetWordTest_ToLower";
   char * filename = &filename_const[0];
+  int a;
 
   FILE * new_f = fopen(filename_const, "w+");
   fprintf(new_f, "Word1 WORD2 WoRd3");
   fclose(new_f);
   FILE * open_file = openFile(filename);
-  EXPECT_STREQ("word1", getNextWord(open_file));
-  EXPECT_STREQ("word2", getNextWord(open_file));
-  EXPECT_STREQ("word3", getNextWord(open_file));
+  EXPECT_STREQ("word1", getNextWord(open_file, &a));
+  EXPECT_STREQ("word2", getNextWord(open_file, &a));
+  EXPECT_STREQ("word3", getNextWord(open_file, &a));
   fclose(new_f);
 }
 
@@ -91,15 +95,16 @@ TEST(addWord, first_addWord_test) {
   char * next_word_pointer = 0;
   char filename_const[] = "/tmp/addWordTest";
   char * filename = &filename_const[0];
+  int a;
 
   FILE * new_f = fopen(filename_const, "w");
   fprintf(new_f, "omg test\n");
   fclose(new_f);
   FILE * open_file = openFile(filename);
   //  в файле 2 слова, по-этому 2 нижнии строки повторяются 2 раза.
-  next_word_pointer = getNextWord(open_file);
+  next_word_pointer = getNextWord(open_file, &a);
   addWord(next_word_pointer);
-  next_word_pointer = getNextWord(open_file);
+  next_word_pointer = getNextWord(open_file, &a);
   addWord(next_word_pointer);
   fclose(open_file);
   //  дальше идет проверка совпадают ли поля структуры dict
@@ -123,21 +128,26 @@ TEST(addWord,  second_addWord_test) {
   char * next_word_pointer = 0;
   char filename_const[] = "/tmp/addWordTest_second";
   char * filename = &filename_const[0];
+  int a;
 
   FILE * new_f = fopen(filename_const,  "w");
   fprintf(new_f,  "sex sex sex drugs drugs rnr\n");
   fclose(new_f);
   FILE * open_file = openFile(filename);
-
+  dic.words[0].num = 0;
+  dic.words[1].num = 0;
   //  Здесь 6 - "магическое" число.Оно выбрано не случано, 6 - это кол-во слов,
   //  которые мы записали в файл.
   for (int i = 0; i < 6; i++) {
-    next_word_pointer = getNextWord(open_file);
+    next_word_pointer = getNextWord(open_file, &a);
     addWord(next_word_pointer);
   }
   fclose(open_file);
   //  3 раза в строке встретилось слово omg, 2 раза test, 1 раз wtf
   //  Проверка происходит предположительно вот так:
+    EXPECT_STREQ("sex", dic.words[0].word);
+    EXPECT_STREQ("drugs", dic.words[1].word);
+    EXPECT_STREQ("rnr", dic.words[2].word);
     EXPECT_EQ(3, dic.words[0].num);
     EXPECT_EQ(2, dic.words[1].num);
     EXPECT_EQ(1, dic.words[2].num);
