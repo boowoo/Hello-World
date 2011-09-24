@@ -1,5 +1,7 @@
-#ifndef FREQDICT_H
-#define FREQDICT_H
+// Copyright 2011 boowoo
+#ifndef FREQDICT_H_
+#define FREQDICT_H_
+
 #include <stdio.h>
 
 FILE *openFile(char file_name[]);
@@ -23,4 +25,4 @@ struct dict {
 };
 
 extern struct dict dic;
-#endif
+#endif  // FREQDICT_H_

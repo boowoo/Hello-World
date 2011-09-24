@@ -1,3 +1,4 @@
+// Copyright 2011 boowoo
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -99,7 +100,9 @@ void addWord(char *word) {
   }
     printf("====================================================\n");
     for (int j = 0; j < dic.total_num; j++)
-    printf("word=%s, dic.words.num=%d, dic.total_num=%d\n", dic.words[j].word, dic.words[j].num, dic.total_num);
+    printf("word=%s, dic.words.num=%d, dic.total_num=%d\n", dic.words[j].word,
+                                                            dic.words[j].num,
+                                                            dic.total_num);
 }
 //  @brief: распечатать словарь
 //  @input: структура, в которой содержится словарь
