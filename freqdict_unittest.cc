@@ -7,7 +7,7 @@ extern struct dict dic;
 // openFile():
 TEST(openFileTest, validFile) {
   // TODO(dmitryhd): add here error handling
-  char filename_const[]= "/tmp/openfiletest_simple";
+  char filename_const[]= "/tmp/validFile";
   char * filename = &filename_const[0];
 
   FILE * new_f = fopen(filename_const, "w+");
@@ -41,7 +41,7 @@ TEST(GetWordTest, SimpleSpaces) {
 
 TEST(GetWordTest, ComplicatedSpaces) {
   // TODO(dmitryhd): add here error handling
-  char filename_const[]= "/tmp/openfiletest_simple";
+  char filename_const[]= "/tmp/ComplicatedSpaces";
   char * filename = &filename_const[0];
   int a;
 
@@ -57,7 +57,7 @@ TEST(GetWordTest, ComplicatedSpaces) {
 
 TEST(GetWordTest, Punctuation) {
   // TODO(dmitryhd): add here error handling
-  char filename_const[]= "/tmp/GetWordTest_Punctuation";
+  char filename_const[]= "/tmp/Punctuation";
   char * filename = &filename_const[0];
   int a;
 
@@ -75,7 +75,7 @@ TEST(GetWordTest, Punctuation) {
 
 TEST(GetWordTest, ToLower) {
   // TODO(dmitryhd): add here error handling
-  char filename_const[]= "/tmp/GetWordTest_ToLower";
+  char filename_const[]= "/tmp/ToLower";
   char * filename = &filename_const[0];
   int a;
 
@@ -94,7 +94,7 @@ TEST(GetWordTest, ToLower) {
 //  предварительно записанные в файлi.
 TEST(addWord, first_addWord_test) {
   char * next_word_pointer = 0;
-  char filename_const[] = "/tmp/addWordTest";
+  char filename_const[] = "/tmp/first_addWord_test";
   char * filename = &filename_const[0];
   int a;
 
@@ -127,7 +127,7 @@ TEST(addWord, first_addWord_test) {
 //  т.е. проверить на правильность поле num структуры word
 TEST(addWord,  second_addWord_test) {
   char * next_word_pointer = 0;
-  char filename_const[] = "/tmp/addWordTest_second";
+  char filename_const[] = "/tmp/second_addWord_test";
   char * filename = &filename_const[0];
   int a;
 
