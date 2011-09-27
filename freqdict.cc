@@ -7,8 +7,7 @@
 
 struct dict dic;
 
-// TODO(dmitryhd): not actual fprintf, rather fopen =)
-//  @brief: обертка для fprintf
+//  @brief: обертка для fopen
 //  @input: имя файла, указанного как аргумент командной строки
 //  @output: указатель на файл
 FILE *openFile(char file_name[]) {
@@ -23,29 +22,32 @@ FILE *openFile(char file_name[]) {
   return file;
 }
 
-//  @brief: ищет в файле следующее слово
+//  @brief: ищет в файле следующее слово и выделяет под него память
 //  @input: file - указатель на файл
 // TODO(dmitryhd): what kind of symbol?
-// TODO(dmitryhd): where is note about memory allocation? =)
-//          сh - указатель на символ
+//          сh - указатель на символ. Нужен для того,
+//          чтобы известить функцию main о конце файла.
 //  @output: указатель на следующее слово
 char *getNextWord(FILE *file, int *ch) {
+  // printf("MOCK: calling getNextWord\n");
+
   int i = 0;
   char is_word_begin = 0;
-  // TODO(dmitryhd): why size_of_word = 1? I think, i got it, but there
-  //  should be explanation for everyone =)
-  int size_of_word = 1;
-  // printf("MOCK: calling getNextWord\n");
-  char *next_word = (char*) malloc(sizeof(char) * size_of_word);
+  int size_of_word = 0;
+  char *next_word = (char*) malloc(sizeof(char)); 
 
   while (true) {
     *ch = getc(file);
     // TODO(dmitryhd): can you merge these two if's? (EOF and isspace)
     //  its behaviour is nearly the same;
+    //  Я что-то не могу понять как объеденить эти строки.
+    //  Во втором if'е же есть еще условие if (is_word_begin) а оно
+    //  принесет кучу ошибок, если использовать его вместе с условием
+    //  if (*ch == EOF).
     if (*ch == EOF) {
       // printf("getNW: i=%d EOF\n", i);
       next_word[i] = '\0';
-      return str_copy(next_word);
+      return strCopy(next_word);
     }
     // printf("getNW: i=%d, get=%c\n", i, ch);
     // check if symbol is space or punctuation character
@@ -53,10 +55,10 @@ char *getNextWord(FILE *file, int *ch) {
       if (is_word_begin) {
         // printf("getNW: endword i=%d, get=%c\n", i, ch);
         next_word[i] = '\0';
-        // TODO(dmitryhd): is there real need for str_copy function?
-        //  if you merge this two if's you'll got only one call of str_copy
+        // TODO(dmitryhd): is there real need for strCopy function?
+        //  if you merge this two if's you'll got only one call of strCopy
         //  and you could just pastle it's code there;
-        return str_copy(next_word);
+        return strCopy(next_word);
       } else {
         continue;
       }
@@ -74,53 +76,42 @@ char *getNextWord(FILE *file, int *ch) {
 //  @input: указатель на строку.
 //  @output: указатель на блок памяти, в котором хранится
 //           строка, на которую был получен указатель.
-char *str_copy(char *s) {
-  char *t;
-  t = (char *) malloc(strlen(s) + 1);
-  if (t != NULL)
-//    strcpy(t,  s);
-  // TODO(dmitryhd): how about less comlex strncpy? =)
-  snprintf(t, strlen(s)+1, "%s", s);
-  return t;
+char *strCopy(char *word) {
+  char *new_str;
+  new_str = (char *) malloc(strlen(word) + 1);
+  if (new_str != NULL)
+  strncpy(new_str, word, strlen(word)+1);
+  return new_str;
 }
 
 //  @brief: добавление слова в словарь
-//  @input: указатель на слово, которую нужно добавить
+//  @input: указатель на слово, которое нужно добавить
 //  @output: нет
 void addWord(char *word) {
   //  printf("MOCK: calling addWord\n");
   //  printf("argumnt of addWord:%s\n", word);
-  //  flag = 1, если текущее слово уже было в словаре.
-  // TODO(dmitryhd): renaming strongly needed!
-  //  i haven't get any information reading name "flag"
-  //  "isWordAlreadyInDictionary" of "isWordInDict" can fix this =)
-  int flag = 0;
+  //  isWordAlredyInDictionary = 1, если текущее слово уже было в словаре.
+  int isWordAlredyInDictionary = 0;
   //  curent_number содержит текущее число всех слов в словаре
   int curent_number = dic.total_num;
-  // TODO(dmitryhd): old code should be removed, not commented.
-//  if (curent_number == 0)
-//    dic.words = (dic_entry*)malloc(sizeof(dic_entry));
-  for (int i = 0; (i < curent_number) && (flag != 1); i++) {
-    // TODO(dmitryhd): thnx, Captain =) useless comment =(
-    //  тело if'а выполняется, если строки равны.
+  for (int i = 0; (i < curent_number) && (isWordAlredyInDictionary != 1); i++) {
     if ( strcmp(word, dic.words[i].word) == 0 ) {
-      flag = 1;
+      isWordAlredyInDictionary = 1;
       dic.words[i].num++;
     }
   }
-  // TODO(dmitryhd): omg, flag! Again =)
-  if (flag == 0) {
+  if (isWordAlredyInDictionary == 0) {
     dic.total_num++;
     dic.words = (dic_entry*)realloc(dic.words,
                                     sizeof(dic_entry) * dic.total_num);
     dic.words[curent_number].word = word;
-    dic.words[curent_number].num++;
+    dic.words[curent_number].num = 1;
   }
-    printf("====================================================\n");
-    for (int j = 0; j < dic.total_num; j++)
-      printf("word=%s, dic.words.num=%d, dic.total_num=%d\n", dic.words[j].word,
-                                                            dic.words[j].num,
-                                                            dic.total_num);
+  //  printf("====================================================\n");
+  //  for (int j = 0; j < dic.total_num; j++)
+  //  printf("word=%s, dic.words.num=%d, dic.total_num=%d\n", dic.words[j].word,
+  //                                                          dic.words[j].num,
+  //                                                          dic.total_num);
 }
 //  @brief: распечатать словарь
 //  @input: структура, в которой содержится словарь

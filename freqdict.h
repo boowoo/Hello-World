@@ -12,7 +12,7 @@ void addWord(char *word);
 
 void printDictionary(struct dict dic);
 
-char *str_copy(char *word);
+char *strCopy(char *word);
 
 struct dic_entry {
   char * word;
