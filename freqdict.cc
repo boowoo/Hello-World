@@ -89,6 +89,7 @@ char *strCopy(char *word) {
 //  @input: указатель на слово, которое нужно добавить
 //  @output: нет
 void addWord(char *word) {
+  // TODO(boowoo): rewrite on linked list
   //  printf("MOCK: calling addWord\n");
   //  printf("argumnt of addWord:%s\n", word);
   //  isWordAlredyInDictionary = 1, если текущее слово уже было в словаре.
@@ -119,6 +120,7 @@ void addWord(char *word) {
 //  @output: нет
 void printDictionary(struct dict dic) {
   //  printf("MOCK: calling PrintDictionary\n");
+  // TODO(boowoo): rewrite on linked list
 
   for (int i = 0; i < dic.total_num; i++) {
     printf("%d %d %s\n", dic.words[i].num, i+1, dic.words[i].word);
