@@ -1,4 +1,5 @@
 // Copyright 2011 boowoo
+// branch: Dynamic array
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

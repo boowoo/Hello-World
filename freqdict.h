@@ -1,4 +1,5 @@
 // Copyright 2011 boowoo
+// branch: Dynamic array
 #ifndef FREQDICT_H_
 #define FREQDICT_H_
 
